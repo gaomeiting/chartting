@@ -2,28 +2,31 @@
  * @Author: Cicy 
  * @Date: 2018-10-30 17:48:52 
  * @Last Modified by: Cicy.gao
- * @Last Modified time: 2018-10-31 15:25:13
+ * @Last Modified time: 2018-10-31 16:53:33
  */
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
+import { addGun, removeGun, addGunAsync } from './index.redux';
 import { Button } from 'antd-mobile';
-import { addGunAsync } from './index.redux';
+@connect((state) => {
+  return {num: state}
+}, {
+  addGun,
+  removeGun,
+  addGunAsync
+})
 class App extends Component {
   constructor(props) {
     super(props);
     
   }
-  
   render() {
-    const store= this.props.store;
-    const addGun = this.props.addGun;
-    const removeGun = this.props.removeGun;
-    const addGunAsync = this.props.addGunAsync;
     return (
       <div>
-        <p>现有机枪把{store.getState()}</p>
-        <Button onClick={ () => store.dispatch(addGun()) }>加机关枪</Button>
-        <Button onClick={ () => store.dispatch(removeGun()) }>减机关枪</Button>
-        <Button onClick={ () => store.dispatch(addGunAsync()) }>迟两天加机关枪</Button>
+        <p>现有机枪把{this.props.num}</p>
+        <Button onClick={ this.props.addGun }>加机关枪</Button>
+        <Button onClick={ this.props.removeGun }>减机关枪</Button>
+        <Button onClick={ this.props.addGunAsync }>迟两天加机关枪</Button>
       </div>
     );
   }
