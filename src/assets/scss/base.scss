@@ -1,0 +1,15 @@
+@import "variable.scss";
+
+body, html {
+	line-height: 1;
+	font-family: "Monospaced Number", "Chinese Quote", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", "Helvetica Neue", Helvetica, Arial, sans-serif;
+	/* user-select: none; */
+	-webkit-tap-highlight-color: transparent;
+	color: #555;
+	background: #fff;
+	font-size: 14px;
+}
+::selection {
+    background: #f90;
+    color: #fff;
+}

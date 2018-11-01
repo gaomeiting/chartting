@@ -1,0 +1,30 @@
+@import "./assets/scss/reset.scss";
+@import "./assets/scss/base.scss";
+@import "./assets/scss/icon.scss";
+
+.fade-enter, .fade-exit.fade-exit-active {
+  opacity: 0;
+}
+.fade-enter.fade-enter-active, .fade-exit {
+  opacity: 1;
+  transition: opacity 300ms ease-in;
+}
+
+.page {
+  width: 100%;
+  min-height: 100vh;
+  .pageNav {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 40px;
+      display: flex;
+      overflow: hidden;
+  }
+  .pageContent {
+    padding-top: 40px;
+    box-sizing: border-box;
+    min-height: 100vh;
+  }
+}

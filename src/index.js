@@ -12,10 +12,11 @@ const store = createStore(counter, compose(
     applyMiddleware(thunk),
     window.devToolsExtension ? window.devToolsExtension() : f => f)
 );
+
 ReactDOM.render(
-    <Provider store={store}>
+    (<Provider store={store}>
         <App />
-    </Provider>, 
+    </Provider>), 
 document.getElementById('root')
 );
 // If you want your app to work offline and load faster, you can change
