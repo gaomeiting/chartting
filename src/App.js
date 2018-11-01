@@ -22,7 +22,6 @@ const MyLoadingComponent = ({ isLoading, error }) => {
       return null;
   }
 };
-
 const AsyncHome = Loadable({
   loader: () => import('./views/home/home'),
   loading: MyLoadingComponent
@@ -31,11 +30,34 @@ const AsyncHomeDetails = Loadable({
   loader: () => import('./views/homeDetails/homeDetails'),
   loading: MyLoadingComponent
 });
+const AsyncLogin = Loadable({
+  loader: () => import('./views/login/login'),
+  loading: MyLoadingComponent
+});
 const routes = [
-  { path: '/', component: AsyncHome, exact: true },
-  { path: '/home', component: AsyncHome, exact: true },
-  { path: '/home/:id', component: AsyncHomeDetails, exact: true },
+  { path: '/', component: AsyncHome, exact: true, requiresAuth: true },
+  { path: '/home', component: AsyncHome, exact: true, requiresAuth: true },
+  { path: '/login', component: AsyncLogin, exact: true },
+  { path: '/home/:id', component: AsyncHomeDetails, exact: true, requiresAuth: true },
 ]
+//路由拦截组件(封装一个私有路由)
+const PrivateRoute = ({ component: Component, ...rest }) => (
+  <Route
+    {...rest}
+    render={props =>
+      localStorage.getItem('user') ? (
+        <Component {...props} />
+      ) : (
+        <Redirect
+          to={{
+            pathname: "/login",
+            state: { from: props.location }
+          }}
+        />
+      )
+    }
+  />
+);
 class App extends Component {
   render() {
     return (
@@ -64,9 +86,14 @@ class App extends Component {
                     >
                       <Switch location={location}>
                         {
-                            routes.map(route => (
-                                <Route key={route.path} path={route.path} component={route.component}  exact={route.exact} />
-                            ))
+                            routes.map(route => {
+                                if(route.requiresAuth) {
+                                  return <PrivateRoute key={route.path} path={route.path} component={route.component}  exact={route.exact} />
+                                }
+                                else {
+                                   return <Route key={route.path} path={route.path} component={route.component}  exact={route.exact} />
+                                }
+                                })
                         }
                         <Route render={() => <div>Not Found</div>} />
                       </Switch>
@@ -89,14 +116,6 @@ function NavLink(props) {
     </li>
   );
 }
-
-/* function Home() {
-  return <h2>我是home页面</h2>
-}
-function HomeDetails({match}) {
-  return <h2>{`我是HomeDetails页面 id是${match.params.id}`}</h2>
-} */
-
 
 
 export default App;
