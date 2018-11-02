@@ -6,6 +6,7 @@ import thunk from 'redux-thunk';
 import reducers from './redux/reducers';
 import './index.css';
 import App from './App';
+import "@babel/polyfill";
 import * as serviceWorker from './serviceWorker';
 const store = createStore(reducers, compose(
     applyMiddleware(thunk),
