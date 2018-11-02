@@ -10,7 +10,7 @@ import {
 } from "react-router-dom";
 import Loadable from 'react-loadable';
 import './App.scss';
-
+import { getData } from './api/api';
 const MyLoadingComponent = ({ isLoading, error }) => {
   if (isLoading) {
       return <div>Loading...</div>
@@ -59,6 +59,14 @@ const PrivateRoute = ({ component: Component, ...rest }) => (
   />
 );
 class App extends Component {
+  componentDidMount() {
+    getData('/api/user/userinfo').then(res => {
+      console.log(res)
+    }).catch(err => {
+      console.log(err)
+    })
+  }
+  
   render() {
     return (
         <Router>
