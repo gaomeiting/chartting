@@ -35,10 +35,10 @@ const AsyncLogin = Loadable({
   loading: MyLoadingComponent
 });
 const routes = [
-  { path: '/', component: AsyncHome, exact: true, requiresAuth: true },
-  { path: '/home', component: AsyncHome, exact: true, requiresAuth: true },
   { path: '/login', component: AsyncLogin, exact: true },
-  { path: '/home/:id', component: AsyncHomeDetails, exact: true, requiresAuth: true },
+  { path: '/', component: AsyncHome, exact: true },
+  { path: '/home', component: AsyncHome, exact: true },
+  { path: '/home/:id', component: AsyncHomeDetails, exact: true },
 ]
 //路由拦截组件(封装一个私有路由)
 const PrivateRoute = ({ component: Component, ...rest }) => (
@@ -72,7 +72,7 @@ class App extends Component {
                 />
     
                 <ul className="pageNav">
-                <i className="iconfont icon-shandian"></i>
+                  <i className="iconfont icon-shandian"></i>
                   <NavLink to="/home">首页</NavLink>
                   <NavLink to="/home/123">详情</NavLink>
                 </ul>
