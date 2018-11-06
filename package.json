@@ -129,6 +129,7 @@
       "react-app"
     ],
     "plugins": [
+      ["@babel/plugin-transform-runtime"],
       [
         "import",
         {
