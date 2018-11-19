@@ -59,6 +59,12 @@ const PrivateRoute = ({ component: Component, ...rest }) => (
   />
 );
 class App extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      navBarFlag : true
+    }
+  }
   componentDidMount() {
     getData('/api/user/userinfo').then(res => {
       console.log(res)
@@ -78,14 +84,16 @@ class App extends Component {
                   path="/"
                   render={() => <Redirect to="/home" />}
                 />
+                { ['/home'].includes(location.pathname)? ( (
+                  <ul className="pageNav">
+                    <i className="iconfont icon-shandian"></i>
+                    <NavLink to="/home">首页</NavLink>
+                    <NavLink to="/home/123">详情</NavLink>
+                  </ul>
+                ) ) : null}
+                
     
-                <ul className="pageNav">
-                  <i className="iconfont icon-shandian"></i>
-                  <NavLink to="/home">首页</NavLink>
-                  <NavLink to="/home/123">详情</NavLink>
-                </ul>
-    
-                <div className="pageContent">
+                <div className={['/home'].includes(location.pathname) ? 'pageContent pageTop' : 'pageContent'}>
                   <TransitionGroup>
                     <CSSTransition
                       key={location.key}
