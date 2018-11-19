@@ -34,8 +34,13 @@ const AsyncLogin = Loadable({
   loader: () => import('./views/login/login'),
   loading: MyLoadingComponent
 });
+const AsyncRegist = Loadable({
+  loader: () => import('./views/regist/regist'),
+  loading: MyLoadingComponent
+});
 const routes = [
   { path: '/login', component: AsyncLogin, exact: true },
+  { path: '/regist', component: AsyncRegist, exact: true },
   { path: '/', component: AsyncHome, exact: true },
   { path: '/home', component: AsyncHome, exact: true },
   { path: '/home/:id', component: AsyncHomeDetails, exact: true },
@@ -66,11 +71,11 @@ class App extends Component {
     }
   }
   componentDidMount() {
-    getData('/api/user/userinfo').then(res => {
+    /* getData('/api/user/userinfo').then(res => {
       console.log(res)
     }).catch(err => {
       console.log(err)
-    })
+    }) */
   }
   
   render() {

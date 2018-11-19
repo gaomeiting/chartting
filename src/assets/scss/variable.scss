@@ -1,15 +1,18 @@
 // 颜色定义规范
-$color-background : #f8f8f8;
-$color-background-d : #24292e;
+$color-background : #f5f7fa;
+$color-background-d : #fff;
 $color-highlight-background : #0366de;
 $color-dialog-background : #666;
-$color-theme : #3cc8b4;
-$color-theme-d : rgba(255, 205, 49, 0.5);
-$color-sub-theme : #d93f30;
-$color-text : #aaa;
-$color-text-d : #666;
-$color-text-l : rgba(0, 0, 0, 0.5);
-$color-text-ll : rgba(0, 0, 0, 0.8);
+$color-theme : #fe8504;
+$color-theme-d : #FFD100;
+$color-theme-l : #5f1212;
+$color-sub-theme : #773f1e;
+$color-btn : #e4e5e5;
+$color-btn-text : #868787;
+$color-text : #999; //正文
+$color-text-d : #666; //灰
+$color-text-l : #333333; //标题
+$color-text-ll : #b0adad; //浅灰
 
 //字体定义规范
 $font-size-small-s : 10px;
@@ -18,4 +21,4 @@ $font-size-medium : 14px;
 $font-size-medium-x : 16px;
 $font-size-large : 18px;
 $font-size-large-x : 22px;
-$font-size-large-xx : 36px;
+$font-size-large-xx : 24px;

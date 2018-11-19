@@ -2,6 +2,11 @@
 @import "./assets/scss/base.scss";
 @import "./assets/scss/icon.scss";
 
+.common-logo-wrap {
+  padding: 40px 0;
+  background-color: $color-background-d;
+  margin-bottom: 16px;
+}
 .fade-enter, .fade-exit.fade-exit-active {
   opacity: 0;
 }
