@@ -10,7 +10,7 @@ import {
 } from "react-router-dom";
 import Loadable from 'react-loadable';
 import './App.scss';
-import { getData } from './api/api';
+import AuthRoute from './components/authroute/authroute'
 const MyLoadingComponent = ({ isLoading, error }) => {
   if (isLoading) {
       return <div>Loading...</div>
@@ -42,8 +42,8 @@ const routes = [
   { path: '/login', component: AsyncLogin, exact: true },
   { path: '/regist', component: AsyncRegist, exact: true },
   { path: '/', component: AsyncHome, exact: true },
-  { path: '/home', component: AsyncHome, exact: true },
-  { path: '/home/:id', component: AsyncHomeDetails, exact: true },
+  { path: '/home', component: AsyncHome, exact: true, requiresAuth: true },
+  { path: '/home/:id', component: AsyncHomeDetails, exact: true, requiresAuth: true },
 ]
 //路由拦截组件(封装一个私有路由)
 const PrivateRoute = ({ component: Component, ...rest }) => (
@@ -71,14 +71,17 @@ class App extends Component {
     }
   }
   componentDidMount() {
-    /* getData('/api/user/userinfo').then(res => {
-      console.log(res)
-    }).catch(err => {
-      console.log(err)
-    }) */
+   
   }
   
   render() {
+    /* const FadingRoute = ({ component: Component, ...rest }) => (
+      <Route {...rest} render={props => (
+        <FadeIn>
+          <Component {...props}/>
+        </FadeIn>
+      )}/>
+    ) */
     return (
         <Router>
           <Route
@@ -99,21 +102,30 @@ class App extends Component {
                 
     
                 <div className={['/home'].includes(location.pathname) ? 'pageContent pageTop' : 'pageContent'}>
-                  <TransitionGroup>
-                    <CSSTransition
-                      key={location.key}
-                      classNames="fade"
-                      timeout={300}
-                    >
+                  
+                   <TransitionGroup>
+                      <CSSTransition
+                            key={location.key}
+                            classNames="fade"
+                            timeout={300}
+                          >
+                          <AuthRoute></AuthRoute>
+                      </CSSTransition>
+                      <CSSTransition
+                        key={location.key}
+                        classNames="fade"
+                        timeout={300}
+                      > 
                       <Switch location={location}>
                         {
                             routes.map(route => {
-                                if(route.requiresAuth) {
+                                return <Route key={route.path} path={route.path} component={route.component}  exact={route.exact} />
+                                /* if(route.requiresAuth) {
                                   return <PrivateRoute key={route.path} path={route.path} component={route.component}  exact={route.exact} />
                                 }
                                 else {
                                    return <Route key={route.path} path={route.path} component={route.component}  exact={route.exact} />
-                                }
+                                } */
                                 })
                         }
                         <Route render={() => <div>Not Found</div>} />
